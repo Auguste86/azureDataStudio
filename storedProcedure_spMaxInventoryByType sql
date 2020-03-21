@@ -1,0 +1,6 @@
+CREATE OR ALTER PROCEDURE spMaxInventoryByType AS
+SELECT ProductTypeName,ProductSubtypeName,max(InventoryLevel)'MaxInventory'
+FROM vInventoryByType
+WHERE MONTH(DateOfInventory) = 4 AND YEAR(DateOfInventory) =2009
+GROUP BY ProductTypeName,ProductSubtypeName,MONTH(DateOfInventory)
+ORDER BY ProductTypeName,ProductSubtypeName
