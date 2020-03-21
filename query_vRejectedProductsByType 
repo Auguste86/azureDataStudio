@@ -1,0 +1,14 @@
+CREATE OR ALTER VIEW RejectedProductsByType AS
+SELECT ProductTypeName
+,ProductSubtypeName
+,CAST(RejectedProducts*100 AS float)/(AcceptedProducts+RejectedProducts)'percent rejected'
+,AcceptedProducts+RejectedProducts'Total manufactured'
+,DateOfManufacture
+
+FROM ManufacturingFact 
+    INNER JOIN DimProduct
+        ON ManufacturingFact.ProductCode = DimProduct.ProductCode
+    INNER JOIN DimProductSubtype
+        ON DimProduct.ProductSubtypeCode = DimProductSubtype.ProductSubtypeCode
+    INNER JOIN DimProductType
+        ON DimProductSubtype.ProductTypeCode = DimProductType.ProductTypeCode

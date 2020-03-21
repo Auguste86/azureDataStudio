@@ -1,0 +1,5 @@
+CREATE or ALTER PROCEDURE spAcceptedByCountry AS
+SELECT CountryCode,CountryName,REPLACE(PlantName,'Maximum Miniatures -','')'Plant Name' ,SUM(AcceptedProducts)'Accepted Products'
+from vAcceptedByCountry
+WHERE MONTH(DateOfManufacture) = 6 and YEAR(DateOfManufacture) = 2010
+GROUP BY CountryCode, CountryName,PlantName

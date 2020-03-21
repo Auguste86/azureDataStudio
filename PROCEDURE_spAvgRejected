@@ -1,0 +1,8 @@
+CREATE or ALTER PROCEDURE spAvgRejected AS
+SELECT ProductTypeName,ProductSubtypeName
+,SUM([percent rejected] *[Total manufactured])/SUM([Total manufactured])'AvgPercentRejected'
+,SUM([Total manufactured]) AS 'TotManufactured'
+FROM vRejectedProductsByType
+WHERE MONTH(DateOfManufacture) = 4 AND YEAR(DateOfManufacture) = 2011
+GROUP BY ProductTypeName,ProductSubtypeName
+ORDER BY ProductTypeName,ProductSubtypeName
